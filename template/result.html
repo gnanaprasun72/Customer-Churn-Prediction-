@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
+   <title>churn prediction</title>
+
+    <style> 
+        #c {
+  border: 10px dotted black;
+  padding: 35px;
+  background: rgb(60, 255, 216);
+  background-clip: content-box;
+}
+    </style>
+</head>
+<body>
+      
+<header class="text-gray-600 body-font" style="background-color: black;" >
+    <div class="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center transition-colors-black">
+      <a class="flex title-font font-medium items-center text-gray-900 mb-4 md:mb-0">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-10 h-10 text-white p-2 bg-indigo-500 rounded-full" viewBox="0 0 24 24">
+          <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path>
+        </svg>
+   
+      </a>
+      <nav class="md:mr-auto md:ml-4 md:py-1 md:pl-4 md:border-l md:border-gray-400	flex flex-wrap items-center text-base justify-center">
+        <a href="/" class="mr-5 hover:text-gray-900">Home</a>
+      </nav>
+
+    </div>
+ 
+  </header>
+
+
+<section class="text-gray-600 body-font relative" >
+    <div class="container px-5 py-2 mx-auto" id="c">
+      <div class="flex flex-col text-center w-full mb-12">
+        <h1 class="sm:text-3xl text-2xl font-medium title-font mb-4 text-gray-900" style="background:tomato; background-color:bisque" >Predict Customer Churn</h1>
+        
+      </div>
+
+      <form action="predictData" method="post">
+        {% csrf_token %}
+
+        <div class="flex flex-col text-center w-full mb-12">
+            <h1 class="sm:text-3xl text-2xl font-medium title-font mb-4 text-gray-900 " style="border: 5px double #000;" >Model Prediction</h1>
+            {% if prediction == 1 %}
+            <h1 class="sm:text-3xl text-2xl font-medium title-font mb-4 text-gray-900"> <span style="background-color: red; padding: 10px; ">  Churn risk: High .   <br><b style="font-size: 1.2rem;
+                font-style: italic;"> ( Mean: Customer likely to Lose. )</span> </h1>
+            {% else %}
+            <h1 class="sm:text-3xl text-2xl font-medium title-font mb-4 text-gray-900" > <span style="background-color: rgb(35, 223, 35); padding: 10px; "> Churn risk: Low .    <br><b style="font-size: 1.2rem;
+                font-style: italic;"> ( Means : Customer likely to Stay. )</span></h1>
+          {% endif %}
+          </div>
+
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
+  <title>churn prediction</title>
+
+  <style>
+    #a {
+      border: 5px dotted black;
+      padding: 25px;
+      background-clip: content-box;
+    }
+
+    form:invalid [type=submit] {
+      background: red;
+    }
+
+    form:valid [type=submit] {
+      background: lime;
+    }
+  </style>
+</head>
+
+<body>
+
+  <header class="text-gray-600 body-font" style="background-color: black;">
+    <div class="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center">
+      <a class="flex title-font font-medium items-center text-gray-900 mb-4 md:mb-0">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round"
+          stroke-linejoin="round" stroke-width="2" class="w-10 h-10 text-white p-2 bg-indigo-500 rounded-full"
+          viewBox="0 0 24 24">
+          <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path>
+        </svg>
+      
+      </a>
+      <nav
+        class="md:mr-auto md:ml-4 md:py-1 md:pl-4 md:border-l md:border-gray-400	flex flex-wrap items-center text-base justify-center">
+        <a href="" class="mr-5 hover:text-white-900">Home</a>
+      </nav>
+    </div>
+  </header>
+
+
+  <section class="text-gray-600 body-font relative">
+    <div class="container px-5 py-2 mx-auto">
+      <div class="flex flex-col text-center w-full mb-12">
+        <h1 class="sm:text-3xl text-2xl font-medium title-font mb-4 text-gray-900" style="border: 5px double #000;">
+          Predict Customer Churn</h1>
+        <p class="lg:w-2/3 mx-auto leading-relaxed text-base">Type in the relevant information about your customer to
+          see if our model thinks they're likely to churn.
+        <p>
+      </div>
+
+      <form action="predictData" method="post" id="a" style="background-color: bisque; -webkit-text-fill-color: black;">
+        {% csrf_token %}
+
+        <div class="lg:w-1/2 md:w-2/3 mx-auto">
+          <div class="flex flex-wrap -m-2">
+            <div class="p-2 w-1/2">
+              <div class="relative">
+                <label for="underline_select" class="sr-only">Underline select</label>
+                <select required id="underline_select" name="country"
+                  class="block py-5 px-0 w-full text-sm text-gray-500 bg-transparent border-1 border-b-2 border-gray-300 border-solid rounded-md appearance-none dark:text-gray-400 dark:border-gray-700 focus:outline-none focus:ring-0 focus:border-gray-200 peer ">
+                  <option selected>Choose a country</option>
+                  <option value="0">France</option>
+                  <option value="1">Germany</option>
+                  <option value="2">Spain</option>
+                </select>
+              </div>
+            </div>
+            <div class="p-2 w-1/2">
+              <div class="relative">
+                <label for="email" class="leading-7 text-sm text-gray-600">Credit Score</label>
+                <input required type="text" id="email" name="c_score"
+                  class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
+              </div>
+            </div>
+
+            <div class="p-2 w-1/2">
+              <div class="relative">
+                <label for="underline_select" class="sr-only">Underline select</label>
+                <select required id="underline_select" name="gender"
+                  class="block py-5 px-0 w-full text-sm text-gray-500 bg-transparent border-0 border-b-2 border-gray-300 border-solid rounded-md appearance-none dark:text-gray-400 dark:border-gray-700 focus:outline-none focus:ring-0 focus:border-gray-200 peer ">
+                  <option selected>Gender</option>
+                  <option value="1">Male</option>
+                  <option value="0">Feamle</option>
+                </select>
+              </div>
+            </div>
+            <div class="p-2 w-1/2">
+              <div class="relative">
+                <label for="email" class="leading-7 text-sm text-gray-600">Age</label>
+                <input required type="text" id="email" name="age"
+                  class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
+              </div>
+            </div>
+
+
+
+            <div class="p-2 w-1/2">
+              <div class="relative">
+                <label for="name" class="leading-7 text-sm text-gray-600">Tenure</label>
+                <input required type="text" id="name" name="tenure"
+                  class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
+              </div>
+            </div>
+            <div class="p-2 w-1/2">
+              <div class="relative">
+                <label for="email" class="leading-7 text-sm text-gray-600">Balance</label>
+                <input required type="text" id="email" name="balance"
+                  class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
+              </div>
+            </div>
+
+
+            <div class="p-2 w-1/2">
+              <div class="relative">
+                <label for="name" class="leading-7 text-sm text-gray-600">Num of Products</label>
+                <input required type="text" id="name" name="numofproducts"
+                  class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
+              </div>
+            </div>
+
+            <div class="p-2 w-1/2">
+              <div class="relative">
+                <label for="underline_select" class="sr-only">Underline select</label>
+                <select required id="underline_select" name="HasCrCard"
+                  class="block py-5 px-0 w-full text-sm text-gray-500 bg-transparent border-0 border-b-2 border-gray-300 border-solid rounded-md appearance-none dark:text-gray-400 dark:border-gray-700 focus:outline-none focus:ring-0 focus:border-gray-200 peer ">
+                  <option selected>HasCrCard</option>
+                  <option value="1">Yes</option>
+                  <option value="0">No</option>
+                </select>
+              </div>
+            </div>
+
+
+
+
+            <div class="p-2 w-1/2">
+              <div class="relative">
+                <label for="underline_select" class="sr-only">Underline select</label>
+                <select required id="underline_select" name="IsActiveMember"
+                  class="block py-5 px-0 w-full text-sm text-gray-500 bg-transparent border-0 border-b-2 border-gray-300 border-solid rounded-md appearance-none dark:text-gray-400 dark:border-gray-700 focus:outline-none focus:ring-0 focus:border-gray-200 peer ">
+                  <option selected>IsActiveMember</option>
+                  <option value="1">Yes</option>
+                  <option value="0">No</option>
+                </select>
+              </div>
+            </div>
+
+
+            <div class="p-2 w-1/2">
+              <div class="relative">
+                <label for="email" class="leading-7 text-sm text-gray-600">EstimatedSalary</label>
+                <input required type="text" id="email" name="EstimatedSalary"
+                  class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
+              </div>
+            </div>
+
+
+
+            <div class="p-2 w-full">
+
+              <!-- <input type="submit" -->
+              <button type="submit"
+                class="flex mx-auto text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg">Button</button>
+            </div>
+
+          </div>
+        </div>
+      </form>
+    </div>
+    </div>
+    </div>
+  </section>
+
+
+
+</body>
+
+</html>
